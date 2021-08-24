@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { getRandomNumber, getRandomColor } from "./utils";
+import React from "react";
 import { FaTwitter, FaQuoteLeft } from "react-icons/fa";
 
-const Quote = ({ quotes }) => {
-  const [randomQuote, setRandomQuote] = useState({});
-  const [color, setColor] = useState("#000");
-
-  const getRandomQuote = () => {
-    let randomIndex = getRandomNumber(quotes.length);
-    const { quote, author } = quotes[randomIndex];
-    setRandomQuote({ quote, author });
-  };
-
-  useEffect(() => {
-    setColor(getRandomColor());
-  }, [randomQuote]);
-
+const Quote = ({ randomQuote, randomColor, getRandomQuote }) => {
   const { quote, author } = randomQuote;
   return (
     <section>
-      <div id="quote-box" className="card text-center" style={{ color: color }}>
+      <div
+        id="quote-box"
+        className="card text-center"
+        style={{ color: randomColor }}
+      >
         <div className="card-body">
+          <button
+            id="new-quote"
+            className="btn"
+            style={{ color: "#fff", backgroundColor: randomColor }}
+            onClick={getRandomQuote}
+          >
+            Get Quote
+          </button>
           <figure class="text-center">
             <blockquote class="blockquote">
               <a
@@ -39,15 +37,6 @@ const Quote = ({ quotes }) => {
             </figcaption>
           </figure>
         </div>
-
-        <button
-          id="new-quote"
-          className="btn float-end"
-          style={{ color: "#fff", backgroundColor: color }}
-          onClick={getRandomQuote}
-        >
-          New Quote
-        </button>
       </div>
     </section>
   );

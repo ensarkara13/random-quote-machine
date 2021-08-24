@@ -13,15 +13,15 @@ code {
 }
 
 #quote-box {
-  margin: 40vh auto;
+  margin: 30vh auto;
   width: 40vw;
-}
-
-.heading {
-  text-align: center;
-  margin-top: 5%;
 }
 
 .quote-sign {
   float: left;
+}
+
+#new-quote {
+  width: 50%;
+  margin: 10px auto;
 }

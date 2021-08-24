@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getRandomColor, getRandomNumber } from "./utils";
 import Quote from "./Quote";
 
 const url =
@@ -6,6 +7,8 @@ const url =
 
 function App() {
   const [quotes, setQuotes] = useState([]);
+  const [randomQuote, setRandomQuote] = useState({});
+  const [randomColor, setRandomColor] = useState("#000");
 
   const fetchQuotes = () => {
     fetch(url)
@@ -19,11 +22,26 @@ function App() {
     fetchQuotes();
   }, []);
 
+  const getRandomQuote = () => {
+    let randomIndex = getRandomNumber(quotes.length);
+    const { quote, author } = quotes[randomIndex];
+    setRandomQuote({ quote, author });
+  };
+
+  useEffect(() => {
+    let color = getRandomColor();
+    document.body.style.backgroundColor = color;
+    setRandomColor(color);
+  }, [randomQuote]);
+
   return (
     <main>
       <div className="container">
-        <h3>Random Quote Machine</h3>
-        <Quote quotes={quotes} />
+        <Quote
+          randomQuote={randomQuote}
+          randomColor={randomColor}
+          getRandomQuote={getRandomQuote}
+        />
       </div>
     </main>
   );
