@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getRandomColor, getRandomNumber } from "./utils";
-import Quote from "./Quote";
+import Quote from "./components/Quote";
 
 const url =
   "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json";
@@ -10,17 +10,20 @@ function App() {
   const [randomQuote, setRandomQuote] = useState({});
   const [randomColor, setRandomColor] = useState("#000");
 
-  const fetchQuotes = () => {
-    fetch(url)
-      .then((response) => response.json())
-      .then(({ quotes }) => {
-        setQuotes(quotes);
-      });
+  const fetchQuotes = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setQuotes(data.quotes);
   };
 
   useEffect(() => {
     fetchQuotes();
   }, []);
+  
+  useEffect(() => {
+    let getQuote = setTimeout(getRandomQuote, 100);
+    return () => clearTimeout(getQuote);
+  },[quotes]);
 
   const getRandomQuote = () => {
     let randomIndex = getRandomNumber(quotes.length);
@@ -36,7 +39,7 @@ function App() {
 
   return (
     <main>
-      <div className="container">
+      <div>
         <Quote
           randomQuote={randomQuote}
           randomColor={randomColor}

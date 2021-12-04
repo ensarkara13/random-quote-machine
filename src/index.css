@@ -25,3 +25,10 @@ code {
   width: 50%;
   margin: 10px auto;
 }
+
+@media screen and (max-width: 600px) {
+  #quote-box {
+    width: 204px;
+    min-width: 204px;
+  }
+}

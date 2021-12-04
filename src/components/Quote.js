@@ -19,8 +19,8 @@ const Quote = ({ randomQuote, randomColor, getRandomQuote }) => {
           >
             Get Quote
           </button>
-          <figure class="text-center">
-            <blockquote class="blockquote">
+          <figure className="text-center">
+            <blockquote className="blockquote">
               <a
                 href={`https://www.twitter.com/intent/tweet?text=${quote}`}
                 id="tweet-quote"
@@ -32,7 +32,7 @@ const Quote = ({ randomQuote, randomColor, getRandomQuote }) => {
               <FaQuoteLeft className="quote-sign" />
               <p id="text">{quote}</p>
             </blockquote>
-            <figcaption id="author" class="blockquote-footer">
+            <figcaption id="author" className="blockquote-footer">
               <cite>{author}</cite>
             </figcaption>
           </figure>
